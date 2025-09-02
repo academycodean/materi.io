@@ -3,740 +3,81 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SQL Notes</title>
+  <title>Codean Bootcamp Portal</title>
   <style>
-    :root {
-      --bg: #f5f7fb;
-      --card: #ffffff;
-      --ink: #1f2937;
-      --muted: #6b7280;
-      --primary: #2563eb;
-      --primary-ink: #0b3fb5;
-      --ring: rgba(37,99,235,0.15);
-      --code-bg: #0f172a;
-      --code-ink: #e5e7eb;
-      --chip: #e5edff;
+    body{
+      margin:0; font-family:sans-serif; background:#0f172a; color:#f1f5f9;
+      display:flex; justify-content:center; align-items:center; height:100vh;
     }
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-      color: var(--ink);
-      background: linear-gradient(180deg, #f8fbff, var(--bg));
-    }
-    header {
-      position: sticky; top: 0; z-index: 50;
-      backdrop-filter: saturate(140%) blur(8px);
-      background: rgba(255,255,255,0.8);
-      border-bottom: 1px solid #eef2f7;
-    }
-    .container { max-width: 1100px; margin: 0 auto; padding: 16px 20px; }
-    .title {
-      display: flex; align-items: center; gap: 12px;
-      font-weight: 800; font-size: 1.6rem; letter-spacing: .3px;
-    }
-    .badge { font-size: .8rem; color: var(--primary-ink); background: var(--chip); padding: 4px 10px; border-radius: 999px; }
-    .grid { display: grid; grid-template-columns: 280px 1fr; gap: 18px; }
-    @media (max-width: 980px){ .grid { grid-template-columns: 1fr; } nav { position: sticky; top: 64px; } }
-
-    /* Nav */
-    nav { align-self: start; position: sticky; top: 72px; }
-    .toc { background: var(--card); border: 1px solid #eef2f7; border-radius: 16px; padding: 14px; box-shadow: 0 6px 18px rgba(20,30,55,.05); }
-    .toc h3 { margin: 4px 8px 10px; font-size: .95rem; color: var(--muted); font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
-    .toc a { display: block; padding: 8px 10px; margin: 2px 0; border-radius: 10px; color: #334155; text-decoration: none; font-size: .95rem; }
-    .toc a:hover { background: #eef4ff; color: var(--primary-ink); }
-    .toc .lvl-2 { padding-left: 18px; font-size: .9rem; }
-
-    /* Sections */
-    section.card { background: var(--card); border: 1px solid #eef2f7; border-radius: 18px; padding: 18px 18px; margin: 10px 0 16px; box-shadow: 0 8px 24px rgba(16,30,54,.06); transition: transform .18s ease, box-shadow .18s ease; }
-    section.card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(16,30,54,.08); }
-    section.card h2 { margin: 10px 8px 6px; font-size: 1.35rem; color: var(--primary-ink); }
-    section.card h3 { margin: 12px 8px 6px; font-size: 1.05rem; color: #0f172a; }
-    section.card p, section.card ul { margin: 8px 10px; line-height: 1.6; }
-    section.card ul { padding-left: 22px; }
-
-    /* Chips / tags */
-    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 8px; }
-    .chip { background: var(--chip); color: var(--primary-ink); padding: 6px 10px; border-radius: 999px; font-size: .85rem; border: 1px solid #dbe7ff; }
-
-    /* Accordions */
-    .acc { border: 1px solid #e7eefb; border-radius: 14px; overflow: hidden; margin: 12px 8px; background: #fbfdff; }
-    .acc summary { cursor: pointer; list-style: none; padding: 12px 14px; font-weight: 700; color: #0f172a; display: flex; align-items: center; justify-content: space-between; }
-    .acc summary::marker, .acc summary::-webkit-details-marker { display: none; }
-    .acc summary span.chev { transition: transform .2s ease; }
-    .acc[open] summary span.chev { transform: rotate(90deg); }
-    .acc .content { border-top: 1px dashed #e5e7eb; padding: 12px 14px; background: #ffffff; }
-
-    /* Code */
-    pre { background: var(--code-bg); color: var(--code-ink); padding: 14px; border-radius: 12px; overflow: auto; font-size: .92rem; line-height: 1.45; border: 1px solid #0b1225; }
-    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
-
-    /* Callouts */
-    .callout { border-left: 4px solid var(--primary); background: #f0f6ff; padding: 10px 12px; border-radius: 8px; margin: 10px 8px; }
-
-    /* Footer */
-    footer { text-align: center; color: var(--muted); padding: 28px 12px; }
-    .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#eef2ff; border:1px solid #dbe4ff; padding:2px 6px; border-radius:6px; }
+    .login, .main { background:#1e293b; padding:30px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,.4); max-width:400px; width:100%; }
+    h1{ text-align:center; margin-bottom:20px; color:#38bdf8; }
+    input{ width:100%; padding:10px; border-radius:8px; border:1px solid #334155; margin:8px 0; background:#0f172a; color:#f1f5f9; }
+    button{ width:100%; padding:10px; border-radius:8px; border:none; background:#38bdf8; color:#0f172a; font-weight:700; cursor:pointer; }
+    button:hover{ background:#0ea5e9; }
+    .hidden{ display:none; }
+    .card{ background:#0f172a; padding:16px; border-radius:12px; border:1px solid #334155; margin:10px 0; }
+    .card h2{ margin:0 0 8px; color:#38bdf8; }
+    ul{ padding-left:20px; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-      <div class="title">SQL Notes <span class="badge">Relational DB & SQL Cheatsheet</span></div>
-      <div>
-        <button id="expandAll" class="kbd" title="Expand all accordions">Expand All</button>
-        <button id="collapseAll" class="kbd" title="Collapse all accordions">Collapse All</button>
-      </div>
+  <div class="login" id="loginBox">
+    <h1>Login</h1>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="login()">Login</button>
+    <p id="error" style="color:#f87171; display:none; text-align:center;">Invalid credentials</p>
+  </div>
+
+  <div class="main hidden" id="mainPage">
+    <h1>Codean Bootcamp</h1>
+    <div class="card">
+      <h2>Frontend (FE)</h2>
+      <ul>
+        <li>Pengenalan Web</li>
+        <li>HTML & CSS</li>
+        <li>JavaScript Dasar</li>
+        <li>React.js Lanjutan</li>
+      </ul>
     </div>
-  </header>
-
-  <main class="container grid">
-    <nav>
-      <div class="toc">
-        <h3>Daftar Isi</h3>
-        <a href="#database">Database & DBMS</a>
-        <a href="#types" class="lvl-2">Types of Databases</a>
-        <a href="#what-sql">What is SQL?</a>
-        <a href="#db-structure">Database Structure</a>
-        <a href="#table-def">What is a Table?</a>
-        <a href="#create-db">Creating our First Database</a>
-        <a href="#create-table">Creating our First Table</a>
-        <a href="#datatypes">SQL Datatypes</a>
-        <a href="#commands">Types of SQL Commands</a>
-        <a href="#db-queries">Database related Queries</a>
-        <a href="#table-queries">Table related Queries</a>
-        <a href="#keys">Keys</a>
-        <a href="#constraints">Constraints</a>
-        <a href="#select">Select in Detail</a>
-        <a href="#where">Where Clause & Operators</a>
-        <a href="#limit-order">Limit & Order By</a>
-        <a href="#agg">Aggregate Functions</a>
-        <a href="#group-by">Group By & Having</a>
-        <a href="#update-delete">Update & Delete</a>
-        <a href="#cascade">Cascading for FK</a>
-        <a href="#alter">Alter Table</a>
-        <a href="#truncate">Truncate</a>
-        <a href="#joins">Joins</a>
-        <a href="#self-join">Self Join</a>
-        <a href="#union">Union</a>
-        <a href="#subqueries">SQL Sub Queries</a>
-        <a href="#views">MySQL Views</a>
-      </div>
-    </nav>
-
-    <div>
-      <!-- Database & DBMS -->
-      <section id="database" class="card">
-        <h2>Database & DBMS</h2>
-        <p>A <b>Database</b> is a collection of data in a digital format that can be easily accessed. A software application used to manage our database is called a <b>DBMS (Database Management System)</b>.</p>
-        <div class="chips">
-          <span class="chip">Digital storage</span>
-          <span class="chip">DBMS manages DB</span>
-        </div>
-      </section>
-
-      <section id="types" class="card">
-        <h2>Types of Databases</h2>
-        <ul>
-          <li><b>Relational</b> &mdash; data stored in <i>tables</i>. <u>We use SQL to work with relational DBMS.</u></li>
-          <li><b>Non-relational (NoSQL)</b> &mdash; data not stored in tables.</li>
-        </ul>
-      </section>
-
-      <section id="what-sql" class="card">
-        <h2>What is SQL?</h2>
-        <p><b>SQL (Structured Query Language)</b> is a programming language used to interact with relational databases. It is used to perform <b>CRUD</b> operations: <b>Create</b>, <b>Read</b>, <b>Update</b>, and <b>Delete</b>.</p>
-      </section>
-
-      <section id="db-structure" class="card">
-        <h2>Database Structure</h2>
-        <p>A database contains one or more <b>tables</b>, and each table holds the actual data as rows (records) and columns (fields).</p>
-      </section>
-
-      <section id="table-def" class="card">
-        <h2>What is a Table?</h2>
-        <p>A <b>table</b> is a structured set of data made up of rows and columns. For example, a <b>Student</b> table might have columns like <i>student_id</i>, <i>name</i>, <i>city</i>, and <i>marks</i>.</p>
-      </section>
-
-      <!-- Creating our First Database -->
-      <section id="create-db" class="card">
-        <h2>Creating our First Database</h2>
-        <details class="acc">
-          <summary><span>Create / Drop Database</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>CREATE DATABASE db_name;
-DROP DATABASE db_name;
-
--- Use a specific database
-USE db_name;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Creating our First Table -->
-      <section id="create-table" class="card">
-        <h2>Creating our First Table</h2>
-        <details class="acc">
-          <summary><span>CREATE TABLE (basic)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>CREATE TABLE table_name (
-  column_name1 datatype constraint,
-  column_name2 datatype constraint,
-  column_name3 datatype constraint
-);
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Datatypes -->
-      <section id="datatypes" class="card">
-        <h2>SQL Datatypes</h2>
-        <p>Datatypes define the type of values that can be stored in a column.</p>
-        <h3>Signed &amp; Unsigned</h3>
-        <ul>
-          <li><code>TINYINT</code> (signed): <code>-128</code> to <code>127</code></li>
-          <li><code>TINYINT UNSIGNED</code>: <code>0</code> to <code>255</code></li>
-        </ul>
-      </section>
-
-      <!-- Types of SQL Commands -->
-      <section id="commands" class="card">
-        <h2>Types of SQL Commands</h2>
-        <ul>
-          <li><b>DDL</b> (Data Definition Language): <code>CREATE</code>, <code>ALTER</code>, <code>RENAME</code>, <code>TRUNCATE</code>, <code>DROP</code></li>
-          <li><b>DML</b> (Data Manipulation Language): <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code></li>
-          <li><b>DCL</b> (Data Control Language): grant &amp; revoke permissions to users</li>
-          <li><b>DQL</b> (Data Query Language): <code>SELECT</code></li>
-          <li><b>TCL</b> (Transaction Control Language): <code>START TRANSACTION</code>, <code>COMMIT</code>, <code>ROLLBACK</code></li>
-        </ul>
-      </section>
-
-      <!-- Database related Queries -->
-      <section id="db-queries" class="card">
-        <h2>Database related Queries</h2>
-        <details class="acc">
-          <summary><span>Show &amp; Create / Drop (safe)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SHOW DATABASES;
-CREATE DATABASE db_name;
-DROP DATABASE db_name;
-
-CREATE DATABASE IF NOT EXISTS db_name;
-DROP DATABASE IF EXISTS db_name;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Table related Queries -->
-      <section id="table-queries" class="card">
-        <h2>Table related Queries</h2>
-        <details class="acc">
-          <summary><span>CREATE / SELECT *</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Create table
-CREATE TABLE table_name (
-  column_name1 datatype constraint,
-  column_name2 datatype constraint
-);
-
--- Select all columns
-SELECT * FROM table_name;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>INSERT (multiple rows)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>INSERT INTO table_name (colname1, colname2)
-VALUES 
-  (col1_v1, col2_v1),
-  (col1_v2, col2_v2);
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Keys -->
-      <section id="keys" class="card">
-        <h2>Keys</h2>
-        <h3>Primary Key</h3>
-        <p>A column (or set of columns) that uniquely identifies each row. There is only one primary key and it should be <b>NOT NULL</b>.</p>
-        <h3>Foreign Key</h3>
-        <p>A column (or set of columns) in a table that refers to the primary key in another table. Foreign keys can have duplicate &amp; <i>NULL</i> values, and there can be multiple FKs.</p>
-      </section>
-
-      <!-- Constraints -->
-      <section id="constraints" class="card">
-        <h2>Constraints</h2>
-        <ul>
-          <li><b>NOT NULL</b> &mdash; column cannot have a NULL value</li>
-          <li><b>UNIQUE</b> &mdash; all values in a column are different</li>
-          <li><b>PRIMARY KEY</b> &mdash; unique and NOT NULL (per table)</li>
-          <li><b>FOREIGN KEY</b> &mdash; prevents actions that would destroy links between tables</li>
-          <li><b>DEFAULT</b> &mdash; sets a default value for a column</li>
-          <li><b>CHECK</b> &mdash; limits values allowed in a column</li>
-        </ul>
-      </section>
-
-      <!-- Select in Detail -->
-      <section id="select" class="card">
-        <h2>Select in Detail</h2>
-        <p>Used to select any data from the database.</p>
-        <details class="acc">
-          <summary><span>Basic SELECT</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Select specific columns
-SELECT col1, col2 FROM table_name;
-
--- Select all columns
-SELECT * FROM table_name;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Where & Operators -->
-      <section id="where" class="card">
-        <h2>Where Clause & Operators</h2>
-        <p><b>WHERE</b> is used to define conditions in queries.</p>
-        <details class="acc">
-          <summary><span>Comparison / Arithmetic</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <div class="callout">
-              <b>Arithmetic</b>: <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code><br />
-              <b>Comparison</b>: <code>=</code>, <code>!=</code>, <code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>
-            </div>
-            <pre><code>SELECT col1 FROM table_name WHERE price &gt;= 100;
-SELECT col1 FROM table_name WHERE (a + b) % 2 = 0;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>Logical Operators (AND, OR, NOT, IN, BETWEEN, LIKE)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- AND / OR
-SELECT * FROM students WHERE city = 'Delhi' AND marks &gt;= 90;
-SELECT * FROM students WHERE city = 'Delhi' OR city = 'Mumbai';
-
--- NOT
-SELECT * FROM products WHERE NOT(category = 'Food');
-
--- IN (matches any value in list)
-SELECT * FROM students WHERE city IN ('Delhi','Mumbai');
-
--- BETWEEN (inclusive range)
-SELECT * FROM orders WHERE amount BETWEEN 1000 AND 5000;
-
--- LIKE (pattern)
-SELECT * FROM users WHERE name LIKE 'A%';
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Limit & Order By -->
-      <section id="limit-order" class="card">
-        <h2>Limit &amp; Order By</h2>
-        <details class="acc">
-          <summary><span>LIMIT rows</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT col1, col2 FROM table_name
-LIMIT 10; -- top 10 rows
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>ORDER BY (ASC/DESC)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT col1, col2 FROM table_name
-ORDER BY col1 ASC, col2 DESC;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Aggregate Functions -->
-      <section id="agg" class="card">
-        <h2>Aggregate Functions</h2>
-        <p>Perform a calculation on a set of values and return a single value.</p>
-        <ul class="chips">
-          <li class="chip"><code>COUNT()</code></li>
-          <li class="chip"><code>MAX()</code></li>
-          <li class="chip"><code>MIN()</code></li>
-          <li class="chip"><code>SUM()</code></li>
-          <li class="chip"><code>AVG()</code></li>
-        </ul>
-        <details class="acc">
-          <summary><span>Examples</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Get average marks
-SELECT AVG(marks) FROM students;
-
--- Get maximum marks
-SELECT MAX(marks) FROM students;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Group By & Having -->
-      <section id="group-by" class="card">
-        <h2>Group By &amp; Having</h2>
-        <p><b>GROUP BY</b> groups rows that have the same values into summary rows (often used with aggregates).</p>
-        <details class="acc">
-          <summary><span>Count students per city</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT city, COUNT(*) AS total_students
-FROM students
-GROUP BY city;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>HAVING (filter after grouping)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Count students in each city where MAX(marks) &gt; 90
-SELECT city, COUNT(*) AS total_students, MAX(marks) AS max_marks
-FROM students
-GROUP BY city
-HAVING MAX(marks) &gt; 90;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>General SELECT order</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT  column(s)
-FROM    table_name
-WHERE   condition
-GROUP BY column(s)
-HAVING  condition
-ORDER BY column(s) ASC|DESC;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Update & Delete -->
-      <section id="update-delete" class="card">
-        <h2>Update &amp; Delete</h2>
-        <details class="acc">
-          <summary><span>UPDATE rows</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>UPDATE table_name
-SET col1 = val1, col2 = val2
-WHERE condition;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>DELETE rows</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>DELETE FROM table_name
-WHERE condition;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Cascading for FK -->
-      <section id="cascade" class="card">
-        <h2>Cascading for Foreign Keys</h2>
-        <h3>ON DELETE CASCADE</h3>
-        <p>Deleting a referenced row in the parent table deletes referencing rows in the child table.</p>
-        <h3>ON UPDATE CASCADE</h3>
-        <p>Updating a referenced PK value updates the referencing rows in the child table.</p>
-      </section>
-
-      <!-- Alter Table -->
-      <section id="alter" class="card">
-        <h2>Alter Table</h2>
-        <details class="acc">
-          <summary><span>ADD / DROP column, RENAME table</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Add column
-ALTER TABLE table_name
-ADD COLUMN column_name datatype constraint;
-
--- Drop column
-ALTER TABLE table_name
-DROP COLUMN column_name;
-
--- Rename table
-ALTER TABLE table_name
-RENAME TO new_table_name;
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>MODIFY / CHANGE column</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Modify column (datatype / constraint)
-ALTER TABLE table_name
-MODIFY col_name new_datatype new_constraint;
-
--- Change column name (and optionally type)
-ALTER TABLE table_name
-CHANGE COLUMN old_name new_name new_datatype new_constraint;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Truncate -->
-      <section id="truncate" class="card">
-        <h2>Truncate</h2>
-        <details class="acc">
-          <summary><span>Delete all data (keep schema)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>TRUNCATE TABLE table_name;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Joins -->
-      <section id="joins" class="card">
-        <h2>Joins in SQL</h2>
-        <p>Joins combine rows from two or more tables based on a related column between them.</p>
-        <h3>Types of Joins</h3>
-        <div class="chips">
-          <span class="chip">INNER JOIN</span>
-          <span class="chip">LEFT JOIN</span>
-          <span class="chip">RIGHT JOIN</span>
-          <span class="chip">FULL (OUTER) JOIN*</span>
-        </div>
-        <p class="callout">*In MySQL, a full outer join can be emulated using <code>LEFT JOIN</code> <b>UNION</b> <code>RIGHT JOIN</code>.</p>
-
-        <details class="acc">
-          <summary><span>INNER JOIN</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Returns records with matches in both tables
-SELECT column_list
-FROM tableA
-INNER JOIN tableB
-  ON tableA.col_name = tableB.col_name;
-
--- Example
-SELECT *
-FROM student
-INNER JOIN course
-  ON student.student_id = course.student_id;
-</code></pre>
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary><span>LEFT JOIN</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Returns all records from LEFT table and matched from RIGHT
-SELECT column_list
-FROM tableA
-LEFT JOIN tableB
-  ON tableA.col_name = tableB.col_name;
-
--- Example
-SELECT *
-FROM student AS s
-LEFT JOIN course AS c
-  ON s.student_id = c.student_id;
-</code></pre>
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary><span>RIGHT JOIN</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Returns all records from RIGHT table and matched from LEFT
-SELECT column_list
-FROM tableA
-RIGHT JOIN tableB
-  ON tableA.col_name = tableB.col_name;
-
--- Example
-SELECT *
-FROM student AS s
-RIGHT JOIN course AS c
-  ON s.student_id = c.student_id;
-</code></pre>
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary><span>FULL JOIN (emulation in MySQL)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- MySQL does not support FULL OUTER JOIN directly
--- Emulate with UNION of LEFT and RIGHT joins
-SELECT *
-FROM tableA
-LEFT JOIN tableB ON tableA.id = tableB.id
-UNION
-SELECT *
-FROM tableA
-RIGHT JOIN tableB ON tableA.id = tableB.id;
-</code></pre>
-          </div>
-        </details>
-
-        <details class="acc">
-          <summary><span>Exclusive Joins (Questions)</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <p><b>Right Exclusive Join</b> &mdash; rows present only in RIGHT table (no match in LEFT).</p>
-            <pre><code>-- Right Exclusive
-SELECT *
-FROM A RIGHT JOIN B ON A.id = B.id
-WHERE A.id IS NULL;
-
--- Left Exclusive
-SELECT *
-FROM A LEFT JOIN B ON A.id = B.id
-WHERE B.id IS NULL;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Self Join -->
-      <section id="self-join" class="card">
-        <h2>Self Join</h2>
-        <p>A regular join where a table is joined with itself, often using aliases.</p>
-        <details class="acc">
-          <summary><span>Syntax &amp; Example</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Syntax
-SELECT column_list
-FROM employees AS a
-JOIN employees AS b
-  ON a.manager_id = b.employee_id;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Union -->
-      <section id="union" class="card">
-        <h2>Union</h2>
-        <p>Combine the result-set of two or more <code>SELECT</code> statements and returns <b>unique</b> records.</p>
-        <ul>
-          <li>Every <code>SELECT</code> should have the same number of columns</li>
-          <li>Columns must have compatible data types</li>
-          <li>Columns in each <code>SELECT</code> should be in the same order</li>
-        </ul>
-        <details class="acc">
-          <summary><span>Syntax</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT column_list FROM tableA
-UNION
-SELECT column_list FROM tableB;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Sub Queries -->
-      <section id="subqueries" class="card">
-        <h2>SQL Sub Queries</h2>
-        <p>A subquery (inner/nested query) is a query within another SQL query. It typically involves two <code>SELECT</code> statements.</p>
-        <details class="acc">
-          <summary><span>Basic pattern</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT column_list
-FROM table_name
-WHERE col_name operator (
-  SELECT ...
-);
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>Example: names with marks &gt; class average</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Step 1: average of class
--- Step 2: select students above average
-SELECT name
-FROM students
-WHERE marks &gt; (
-  SELECT AVG(marks) FROM students
-);
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>Example: names with even roll numbers</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>SELECT name
-FROM students
-WHERE roll_no IN (
-  SELECT roll_no FROM students WHERE MOD(roll_no, 2) = 0
-);
-</code></pre>
-          </div>
-        </details>
-        <details class="acc">
-          <summary><span>Example with FROM: max marks for a city</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Find the max marks from students of Delhi
-SELECT MAX(marks) AS max_marks
-FROM (
-  SELECT * FROM students WHERE city = 'Delhi'
-) AS delhi_students;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <!-- Views -->
-      <section id="views" class="card">
-        <h2>MySQL Views</h2>
-        <p>A <b>view</b> is a virtual table based on the result-set of an SQL statement. A view always shows up-to-date data because the database engine recreates the view each time it is queried.</p>
-        <details class="acc">
-          <summary><span>Create &amp; Use a View</span><span class="chev">⯈</span></summary>
-          <div class="content">
-            <pre><code>-- Create a view
-CREATE VIEW top_students AS
-SELECT name, marks
-FROM students
-WHERE marks &gt;= 90;
-
--- Query the view
-SELECT * FROM top_students;
-</code></pre>
-          </div>
-        </details>
-      </section>
-
-      <footer>
-        <small>Built as an interactive HTML reference. Use the buttons above to expand/collapse all code blocks. Smooth scroll enabled for the ToC.</small>
-      </footer>
+    <div class="card">
+      <h2>Backend (BE)</h2>
+      <ul>
+        <li>Java Fundamentals</li>
+        <li>Spring Boot</li>
+        <li>REST API</li>
+        <li>Authentication & Security</li>
+      </ul>
     </div>
-  </main>
+    <div class="card">
+      <h2>Database</h2>
+      <ul>
+        <li>Relational Database</li>
+        <li>SQL Queries</li>
+        <li>Joins & Subqueries</li>
+        <li>Database Design</li>
+      </ul>
+    </div>
+  </div>
 
   <script>
-    // Smooth scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener('click', (e) => {
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if (el) {
-          e.preventDefault();
-          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
+    const users = [
+      {username:'admin', password:'1234'},
+      {username:'student', password:'bootcamp'},
+      {username:'codean', password:'2025'}
+    ];
 
-    // Expand / Collapse all accordions
-    const detailsList = Array.from(document.querySelectorAll('details.acc'));
-    document.getElementById('expandAll').addEventListener('click', () => {
-      detailsList.forEach(d => d.open = true);
-    });
-    document.getElementById('collapseAll').addEventListener('click', () => {
-      detailsList.forEach(d => d.open = false);
-    });
+    function login(){
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      const found = users.find(x => x.username===u && x.password===p);
+      if(found){
+        document.getElementById('loginBox').classList.add('hidden');
+        document.getElementById('mainPage').classList.remove('hidden');
+      } else {
+        document.getElementById('error').style.display='block';
+      }
+    }
   </script>
 </body>
 </html>
