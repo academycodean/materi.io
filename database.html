@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Notes</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --ink: #f1f5f9;
+      --muted: #94a3b8;
+      --primary: #38bdf8;
+      --primary-ink: #0ea5e9;
+      --ring: rgba(56,189,248,0.15);
+      --code-bg: #0a0f1c;
+      --code-ink: #e2e8f0;
+      --chip: #1d4ed8;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: linear-gradient(180deg, #0f172a, #1e293b);
+    }
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: rgba(15,23,42,0.85);
+      border-bottom: 1px solid #1e293b;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 16px 20px; }
+    .title {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 800; font-size: 1.6rem; letter-spacing: .3px;
+    }
+    .badge { font-size: .8rem; color: var(--ink); background: var(--primary-ink); padding: 4px 10px; border-radius: 999px; }
+    .grid { display: grid; grid-template-columns: 280px 1fr; gap: 18px; }
+    @media (max-width: 980px){ .grid { grid-template-columns: 1fr; } nav { position: sticky; top: 64px; } }
+
+    /* Nav */
+    nav { align-self: start; position: sticky; top: 72px; }
+    .toc { background: var(--card); border: 1px solid #334155; border-radius: 16px; padding: 14px; box-shadow: 0 6px 18px rgba(0,0,0,.25); }
+    .toc h3 { margin: 4px 8px 10px; font-size: .95rem; color: var(--muted); font-weight: 700; letter-spacing: .3px; text-transform: uppercase; }
+    .toc a { display: block; padding: 8px 10px; margin: 2px 0; border-radius: 10px; color: #e2e8f0; text-decoration: none; font-size: .95rem; }
+    .toc a:hover { background: #1e40af; color: #f1f5f9; }
+    .toc .lvl-2 { padding-left: 18px; font-size: .9rem; }
+
+    /* Sections */
+    section.card { background: var(--card); border: 1px solid #334155; border-radius: 18px; padding: 18px 18px; margin: 10px 0 16px; box-shadow: 0 8px 24px rgba(0,0,0,.3); transition: transform .18s ease, box-shadow .18s ease; }
+    section.card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,.4); }
+    section.card h2 { margin: 10px 8px 6px; font-size: 1.35rem; color: var(--primary); }
+    section.card h3 { margin: 12px 8px 6px; font-size: 1.05rem; color: #f8fafc; }
+    section.card p, section.card ul { margin: 8px 10px; line-height: 1.6; }
+    section.card ul { padding-left: 22px; }
+
+    /* Chips / tags */
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 8px; }
+    .chip { background: #1e40af; color: #e0f2fe; padding: 6px 10px; border-radius: 999px; font-size: .85rem; border: 1px solid #3b82f6; }
+
+    /* Accordions */
+    .acc { border: 1px solid #334155; border-radius: 14px; overflow: hidden; margin: 12px 8px; background: #0f172a; }
+    .acc summary { cursor: pointer; list-style: none; padding: 12px 14px; font-weight: 700; color: #f1f5f9; display: flex; align-items: center; justify-content: space-between; }
+    .acc summary::marker, .acc summary::-webkit-details-marker { display: none; }
+    .acc summary span.chev { transition: transform .2s ease; }
+    .acc[open] summary span.chev { transform: rotate(90deg); }
+    .acc .content { border-top: 1px dashed #334155; padding: 12px 14px; background: #1e293b; }
+
+    /* Code */
+    pre { background: var(--code-bg); color: var(--code-ink); padding: 14px; border-radius: 12px; overflow: auto; font-size: .92rem; line-height: 1.45; border: 1px solid #1e293b; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; }
+
+    /* Callouts */
+    .callout { border-left: 4px solid var(--primary); background: #0c4a6e; padding: 10px 12px; border-radius: 8px; margin: 10px 8px; color: #f1f5f9; }
+
+    /* Footer */
+    footer { text-align: center; color: var(--muted); padding: 28px 12px; }
+    .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#1e40af; border:1px solid #3b82f6; color:#f1f5f9; padding:2px 6px; border-radius:6px; }
+  </style>
+</head>
+<body>
+  <!-- isi body sama dengan sebelumnya -->
+</body>
+</html>
