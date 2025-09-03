@@ -94,31 +94,43 @@
   </div>
 
   <script>
-    const users = [
-      {username:'admin', password:'1234'},
-      {username:'student', password:'bootcamp'},
-      {username:'codean', password:'2025'}
-    ];
+  let users = [];
+  let sessions = [];
 
-    function login(){
-      const u = document.getElementById('username').value;
-      const p = document.getElementById('password').value;
-      const found = users.find(x => x.username===u && x.password===p);
-      if(found){
-        document.getElementById('loginBox').classList.add('hidden');
-        document.getElementById('mainPage').classList.remove('hidden');
-      } else {
-        document.getElementById('error').style.display='block';
-      }
-    }
+  // Ambil data user dari JSON
+  fetch('users.json')
+    .then(res => res.json())
+    .then(data => { users = data; });
 
-    function logout(){
-      document.getElementById('mainPage').classList.add('hidden');
-      document.getElementById('loginBox').classList.remove('hidden');
-      document.getElementById('username').value='';
-      document.getElementById('password').value='';
-      document.getElementById('error').style.display='none';
+  // Ambil session dari JSON
+  fetch('sessions.json')
+    .then(res => res.json())
+    .then(data => { sessions = data; });
+
+  function login() {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    const found = users.find(x => x.username===u && x.password===p);
+
+    if(found){
+      sessions.push({ username: u, time: Date.now() });
+      showMain(u);
+    } else {
+      document.getElementById('error').style.display='block';
     }
+  }
+
+  function logout(user) {
+    sessions = sessions.filter(s => s.username !== user);
+    document.getElementById('mainPage').classList.add('hidden');
+    document.getElementById('loginBox').classList.remove('hidden');
+  }
+
+  function showMain(username) {
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('mainPage').classList.remove('hidden');
+    document.querySelector('.typing').textContent = "Codean Bootcamp - " + username;
+  }
 
     function navigate(page){
       window.location.href = page;
