@@ -48,6 +48,12 @@
       75% { transform: translate(1px, 1px); }
       100% { transform: translate(0, 0); }
     }
+
+    /* Responsive */
+    @media (max-width:600px){
+      .login, .main{ max-width:90%; padding:20px; }
+      .typing{ font-size:1.4rem; }
+    }
   </style>
 </head>
 <body>
@@ -94,47 +100,59 @@
   </div>
 
   <script>
-  let users = [];
-  let sessions = [];
+    let users = [];
 
-  // Ambil data user dari JSON
-  fetch('users.json')
-    .then(res => res.json())
-    .then(data => { users = data; });
+    // Ambil data user dari file JSON
+    fetch('users.json')
+      .then(res => res.json())
+      .then(data => { users = data; });
 
-  // Ambil session dari JSON
-  fetch('sessions.json')
-    .then(res => res.json())
-    .then(data => { sessions = data; });
+    function login(){
+      const u = document.getElementById('username').value;
+      const p = document.getElementById('password').value;
+      const found = users.find(x => x.username===u && x.password===p);
 
-  function login() {
-    const u = document.getElementById('username').value;
-    const p = document.getElementById('password').value;
-    const found = users.find(x => x.username===u && x.password===p);
-
-    if(found){
-      sessions.push({ username: u, time: Date.now() });
-      showMain(u);
-    } else {
-      document.getElementById('error').style.display='block';
+      if(found){
+        let sessions = JSON.parse(localStorage.getItem('sessions') || '[]');
+        sessions.push({ username: u, time: Date.now() });
+        localStorage.setItem('sessions', JSON.stringify(sessions));
+        showMain(u);
+      } else {
+        document.getElementById('error').style.display='block';
+      }
     }
-  }
 
-  function logout(user) {
-    sessions = sessions.filter(s => s.username !== user);
-    document.getElementById('mainPage').classList.add('hidden');
-    document.getElementById('loginBox').classList.remove('hidden');
-  }
+    function logout(){
+      let sessions = JSON.parse(localStorage.getItem('sessions') || '[]');
+      const u = document.querySelector('.typing').textContent.replace('Codean Bootcamp - ', '');
+      sessions = sessions.filter(s => s.username !== u);
+      localStorage.setItem('sessions', JSON.stringify(sessions));
 
-  function showMain(username) {
-    document.getElementById('loginBox').classList.add('hidden');
-    document.getElementById('mainPage').classList.remove('hidden');
-    document.querySelector('.typing').textContent = "Codean Bootcamp - " + username;
-  }
+      document.getElementById('mainPage').classList.add('hidden');
+      document.getElementById('loginBox').classList.remove('hidden');
+      document.getElementById('username').value='';
+      document.getElementById('password').value='';
+      document.getElementById('error').style.display='none';
+    }
+
+    function showMain(username) {
+      document.getElementById('loginBox').classList.add('hidden');
+      document.getElementById('mainPage').classList.remove('hidden');
+      document.querySelector('.typing').textContent = "Codean Bootcamp - " + username;
+    }
 
     function navigate(page){
       window.location.href = page;
     }
+
+    // Auto login jika session ada
+    function autoLogin(){
+      let sessions = JSON.parse(localStorage.getItem('sessions') || '[]');
+      if(sessions.length > 0){
+        showMain(sessions[0].username);
+      }
+    }
+    window.onload = autoLogin;
   </script>
 </body>
 </html>
