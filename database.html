@@ -79,7 +79,26 @@
     footer { text-align: center; color: var(--muted); padding: 28px 12px; }
     .sr-only{ position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     .kbd{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; background:#eef2ff; border:1px solid #dbe4ff; padding:2px 6px; border-radius:6px; cursor:pointer; }
-
+    
+    /* Hamburger */
+    .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    }
+    .hamburger span {
+    width: 24px;
+    height: 3px;
+    background: #1f2937;
+    border-radius: 2px;
+    }
+    @media (max-width: 768px) {
+      nav { display: none; }
+      nav.active { display: block; margin-top: 12px; }
+      .hamburger { display: flex; }
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .grid { grid-template-columns: 1fr; }
@@ -98,6 +117,13 @@
         <button onclick="logout()" class="kbd" title="Logout">Logout</button>
       </div>
     </div>
+    
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    
   </header>
 
   <main class="container grid">
@@ -759,6 +785,9 @@ SELECT * FROM top_students;
     });
     document.getElementById('collapseAll').addEventListener('click', () => {
       detailsList.forEach(d => d.open = false);
+    });
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.querySelector('nav').classList.toggle('active');
     });
   </script>
 </body>
